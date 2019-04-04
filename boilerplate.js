@@ -1,28 +1,22 @@
 const console = require('console');
-const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
+const typeorm = require('typeorm');
 
-const DB_PATH = 'database/database.sqlite';
+const User = require('./models/User');
 
-fs.writeFile(DB_PATH, '', { flag: 'a' }, (err) => {
-  if (err) {
-    throw err;
-  }
-});
-const db = new sqlite3.Database(DB_PATH);
+(async () => {
+  const connection = await typeorm.createConnection();
+  const userRepository = connection.getRepository(User);
 
-db.serialize(() => {
-  db.run('CREATE TABLE lorem (info TEXT)');
-
-  const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-  for (let i = 0; i < 10; i++) {
-    stmt.run(`Ipsum ${i}`);
-  }
-  stmt.finalize();
-
-  db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
-    console.log(`${row.id}: ${row.info}`);
+  const user = new User({
+    name: 'Test User',
+    email: 'test2@example.com',
+    password: 'secret',
   });
-});
-
-db.close();
+  userRepository.save(user).then(() => {
+    console.log(user);
+  }).catch((error) => {
+    console.error(error);
+  }).finally(() => {
+    connection.close();
+  });
+})();
