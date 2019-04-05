@@ -13,9 +13,12 @@ fs.writeFile(DB_PATH, '', { flag: 'a' }, (err) => {
 module.exports = {
   type: 'sqlite',
   database: DB_PATH,
-  synchronize: true,
   logging: false,
   entities: [
     UserSchema,
   ],
+  migrations: ['database/migrations/*.js'],
+  cli: {
+    migrationsDir: 'database/migrations',
+  },
 };
