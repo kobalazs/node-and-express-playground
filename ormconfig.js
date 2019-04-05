@@ -1,5 +1,4 @@
 const fs = require('fs');
-const UserSchema = require('./entities/UserSchema');
 
 const DB_PATH = 'database/database.sqlite';
 
@@ -15,10 +14,11 @@ module.exports = {
   database: DB_PATH,
   logging: false,
   entities: [
-    UserSchema,
+    'entities/**/*.js',
   ],
   migrations: ['database/migrations/*.js'],
   cli: {
+    entitiesDir: 'entities',
     migrationsDir: 'database/migrations',
   },
 };
