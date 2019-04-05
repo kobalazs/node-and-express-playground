@@ -6,9 +6,13 @@
     "start": "node ./bin/www",
     "watch": "DEBUG=node-and-express-playground:* nodemon ./bin/www",
     "lint": "./node_modules/.bin/eslint .",
-    "typeorm": "./node_modules/.bin/typeorm"
+    "typeorm": "./node_modules/.bin/typeorm",
+    "db:migrate": "npm run typeorm migration:run",
+    "db:seed": "node ./database/databaseSeeder.js",
+    "db:reset": "npm run typeorm schema:drop && npm run db:migrate && npm run db:seed"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
