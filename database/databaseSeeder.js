@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const console = require('console');
 const typeorm = require('typeorm');
+require('dotenv').config();
 
 const userSeeder = require('./seeds/userSeeder');
 

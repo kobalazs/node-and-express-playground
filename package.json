@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "init": "node ./init.js",
     "start": "node ./bin/www",
     "watch": "DEBUG=node-and-express-playground:* nodemon ./bin/www",
     "lint": "./node_modules/.bin/eslint .",
@@ -14,10 +15,14 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "cookie-parser": "~1.4.3",
+    "crypto": "^1.0.1",
     "debug": "~2.6.9",
+    "dotenv": "^7.0.0",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.0",
+    "multer": "^1.4.1",
     "pug": "^2.0.3",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.0.6",

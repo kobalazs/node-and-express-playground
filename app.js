@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const typeorm = require('typeorm');
 require('reflect-metadata');
+require('dotenv').config();
 
 const apiRouter = require('./routes/api');
 const indexRouter = require('./routes/index');
