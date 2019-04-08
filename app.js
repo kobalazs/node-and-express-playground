@@ -6,8 +6,8 @@ const logger = require('morgan');
 const typeorm = require('typeorm');
 require('reflect-metadata');
 
+const apiRouter = require('./routes/api');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 const app = express();
 typeorm.createConnection().then(async () => {
@@ -22,7 +22,7 @@ typeorm.createConnection().then(async () => {
   app.use(express.static(path.join(__dirname, 'public')));
 
   app.use('/', indexRouter);
-  app.use('/users', usersRouter);
+  app.use('/api', apiRouter);
 
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
