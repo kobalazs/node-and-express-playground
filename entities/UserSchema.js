@@ -1,7 +1,7 @@
-const { EntitySchema } = require('typeorm');
+const BaseSchema = require('./BaseSchema');
 const User = require('../models/User');
 
-module.exports = new EntitySchema({
+module.exports = new BaseSchema({
   name: 'User',
   target: User,
   columns: {
@@ -19,6 +19,7 @@ module.exports = new EntitySchema({
     },
     password: {
       type: 'varchar',
+      hidden: true,
     },
   },
   relations: {},
