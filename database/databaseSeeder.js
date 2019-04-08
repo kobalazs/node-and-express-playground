@@ -4,6 +4,7 @@ const typeorm = require('typeorm');
 require('dotenv').config();
 
 const userSeeder = require('./seeds/userSeeder');
+const taskSeeder = require('./seeds/taskSeeder');
 
 console.info(chalk.green('Seeding database...'));
 
@@ -13,6 +14,9 @@ console.info(chalk.green('Seeding database...'));
 
     console.log('UserSeeder');
     await userSeeder();
+
+    console.log('TaskSeeder');
+    await taskSeeder();
 
     console.info(chalk.green('Seeding completed.'));
   } catch (error) {
