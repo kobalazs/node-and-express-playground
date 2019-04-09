@@ -15,6 +15,10 @@ module.exports = new BaseSchema({
     },
     name: {
       type: 'varchar',
+      constraints: {
+        presence: true,
+        length: { minimum: 1, maximum: 255 },
+      },
     },
     color: {
       type: 'varchar',
