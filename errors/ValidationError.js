@@ -1,4 +1,6 @@
-module.exports = class ValidationExport extends Error {
+const HttpError = require('./HttpError');
+
+module.exports = class ValidationExport extends HttpError {
   constructor(data, ...args) {
     super(...args);
     this.status = this.status || 400;
