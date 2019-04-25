@@ -1,16 +1,18 @@
 const router = require('express').Router();
 const multer = require('multer');
+const cors = require('cors');
 
 const AuthController = require('../controllers/AuthController');
 const UserController = require('../controllers/UserController');
 const TaskController = require('../controllers/TaskController');
+
+router.use(cors());
 
 router.get('/', (_req, res, _next) => {
   res.send({
     message: 'Hello world!',
   });
 });
-
 router.post('/user/register', multer().none(), UserController.register);
 router.post('/auth', multer().none(), AuthController.auth);
 
