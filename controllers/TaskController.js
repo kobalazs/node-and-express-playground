@@ -38,4 +38,32 @@ module.exports = {
       next(error);
     }
   },
+  update: async (req, res, next) => {
+    try {
+      const validationFailures = validate(req.body, taskSchema.getConstraints());
+      if (validationFailures) {
+        throw new ValidationError(validationFailures);
+      }
+
+      const taskRepository = typeorm.getRepository(Task);
+      const task = await taskRepository.findOneOrFail({ id: req.params.id, user_id: req.user.id });
+      task.fill(req.body);
+
+      const savedTask = await taskRepository.save(task);
+      res.send(savedTask);
+    } catch (error) {
+      next(error);
+    }
+  },
+  delete: async (req, res, next) => {
+    try {
+      const taskRepository = typeorm.getRepository(Task);
+      // At the moment Repository.delete() does not return any usable data,
+      // thus we cannot handle failures. See https://github.com/typeorm/typeorm/issues/2415
+      await taskRepository.delete({ id: req.params.id, user_id: req.user.id });
+      res.send({});
+    } catch (error) {
+      next(new HttpError(404, 'Task not found!'));
+    }
+  },
 };

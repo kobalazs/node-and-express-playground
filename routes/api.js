@@ -23,9 +23,11 @@ router.put('/user/:id', multer().none(), UserController.update);
 router.get('/task', TaskController.list);
 router.get('/task/:id', TaskController.show);
 router.post('/task', multer().none(), TaskController.create);
+router.put('/task/:id', multer().none(), TaskController.update);
+router.delete('/task/:id', TaskController.delete);
 
 router.all('*', (_req, res, _next) => {
-  res.status(400).send({ error: 'Bad Request' });
+  res.status(400).send({ message: 'Bad Request', status: 400 });
 });
 
 module.exports = router;
