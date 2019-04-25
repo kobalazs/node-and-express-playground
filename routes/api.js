@@ -11,11 +11,14 @@ router.get('/', (_req, res, _next) => {
   });
 });
 
+router.post('/user/register', multer().none(), UserController.register);
 router.post('/auth', multer().none(), AuthController.auth);
 
 router.all('*', AuthController.protect);
 
 router.get('/user', UserController.list);
+router.get('/user/:id', UserController.show);
+router.put('/user/:id', multer().none(), UserController.update);
 
 router.get('/task', TaskController.list);
 router.get('/task/:id', TaskController.show);
