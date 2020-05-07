@@ -1,28 +1,35 @@
 const console = require('console');
-const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
+const Sequelize = require('sequelize');
 
 const DB_PATH = 'database/database.sqlite';
 
-fs.writeFile(DB_PATH, '', { flag: 'a' }, (err) => {
-  if (err) {
-    throw err;
-  }
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: DB_PATH,
 });
-const db = new sqlite3.Database(DB_PATH);
 
-db.serialize(() => {
-  db.run('CREATE TABLE IF NOT EXISTS lorem (info TEXT)');
-
-  const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-  for (let i = 0; i < 10; i++) {
-    stmt.run(`Ipsum ${i}`);
-  }
-  stmt.finalize();
-
-  db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
-    console.log(`${row.id}: ${row.info}`);
+(async () => {
+  const Lorem = sequelize.define('lorem', {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    info: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   });
-});
+  await Lorem.sync({ force: true });
 
-db.close();
+  const results = [];
+  for (let i = 0; i < 10; i++) {
+    results.push(Lorem.create({
+      info: `Ipsum ${i}`,
+    }));
+  }
+  await Promise.all(results);
+
+  const lorems = await Lorem.findAll();
+  lorems.forEach((lorem) => console.log(`${lorem.id}: ${lorem.info}`));
+})();
