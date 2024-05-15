@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const console = require('console');
 const typeorm = require('typeorm');
 require('dotenv').config();
@@ -6,7 +5,7 @@ require('dotenv').config();
 const userSeeder = require('./seeds/userSeeder');
 const taskSeeder = require('./seeds/taskSeeder');
 
-console.info(chalk.green('Seeding database...'));
+console.info('Seeding database...');
 
 (async () => {
   try {
@@ -18,8 +17,8 @@ console.info(chalk.green('Seeding database...'));
     console.log('TaskSeeder');
     await taskSeeder();
 
-    console.info(chalk.green('Seeding completed.'));
+    console.info('Seeding completed.');
   } catch (error) {
-    console.error(chalk.red(error));
+    console.error(error);
   }
 })();

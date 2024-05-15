@@ -54,7 +54,7 @@ module.exports = class CreateTasksTable1554734113238 {
   // eslint-disable-next-line class-methods-use-this
   async down(queryRunner) {
     const table = await queryRunner.getTable('task');
-    const foreignKey = table.foreignKeys.find(fk => fk.columnNames.indexOf('user_id') !== -1);
+    const foreignKey = table.foreignKeys.find((fk) => fk.columnNames.indexOf('user_id') !== -1);
     await queryRunner.dropForeignKey('user', foreignKey);
     await queryRunner.dropTable('task');
   }

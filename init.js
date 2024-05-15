@@ -1,6 +1,5 @@
-const chalk = require('chalk');
 const console = require('console');
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 const fs = require('fs');
 
 const initDatabase = () => {
@@ -28,7 +27,7 @@ const initSecrets = () => ({
 
 const init = () => {
   try {
-    const env = Object.assign({}, initDatabase(), initSecrets());
+    const env = { ...initDatabase(), ...initSecrets() };
     let envString = '';
     Object.keys(env).forEach((key) => {
       envString += `${key} = ${env[key]}\n`;
@@ -40,9 +39,9 @@ const init = () => {
       }
     });
 
-    console.log(chalk.green('Env file created.'));
+    console.log('Env file created.');
   } catch (err) {
-    console.error(chalk.red(err));
+    console.error(err);
   }
 };
 

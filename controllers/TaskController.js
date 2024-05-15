@@ -11,7 +11,7 @@ module.exports = {
     const taskRepository = typeorm.getRepository(Task);
     const tasks = await taskRepository.find({ user_id: req.user.id });
 
-    res.send(tasks.map(task => taskSchema.transform(task)));
+    res.send(tasks.map((task) => taskSchema.transform(task)));
   },
   show: async (req, res, next) => {
     try {

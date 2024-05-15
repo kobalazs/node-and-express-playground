@@ -11,7 +11,7 @@ module.exports = {
     const userRepository = typeorm.getRepository(User);
     const users = await userRepository.find();
 
-    res.send(users.map(user => userSchema.transform(user)));
+    res.send(users.map((user) => userSchema.transform(user)));
   },
   show: async (req, res, next) => {
     try {
