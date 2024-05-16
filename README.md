@@ -9,7 +9,8 @@ Node.js & Express.js tech demo, implementing a simple Todo app API (using SQLite
 4. Install project dependencies by running `npm install` in the project root
 5. Initialize environment settings: `npm run init`
 6. Migrate & seed the database: `npm run db:reset`
-7. Start the project in dev mode: `npm run watch`
+7. Start the project: `npm start`
+8. Or start the project in dev mode: `npm run watch`
 
 ## Development
 * For more shortcuts, check out `package.json` scripts.
