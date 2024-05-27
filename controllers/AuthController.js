@@ -25,7 +25,7 @@ module.exports = {
   },
 
   protect: async (req, _res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
     jwt.verify(token, process.env.JWT_SECRET, async (_err, payload) => {
       if (payload) {
         const userRepository = typeorm.getRepository(User);
